@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口,改为对应的Dao接口位置-->
+<mapper namespace="com.sty.smbms_master.mapper.UserMapper">
+    <!--这句select相当于重写上面连接的接口的方法,id代表方法名，resultType代表方法的返回值类型-->
+    <select id="findAll" resultType="smbmsUser">
+        select *
+        from smbms.smbms_user;
+    </select>
+    <insert id="addUser" parameterType="smbmsUser">
+        insert into smbms.smbms_user (userCode,userName,userPassword,gender,birthday,phone,address,createdBy,creationDate,modifyBy,modifyDate)
+        values (#{userCode},#{userName},#{userPassword},#{gender},#{birthday},#{phone},#{address},#{createdBy},#{createDate},#{modifyBy},#{modifyDate});
+    </insert>
+    <delete id="deleteById" parameterType="int">
+        delete
+        from smbms.smbms_user
+        where id=#{id};
+    </delete>
+    <select id="findById" parameterType="int" resultType="smbmsUser">
+        select *
+        from smbms.smbms_user
+        where id=#{id};
+    </select>
+    <update id="updateUser" parameterType="smbmsUser">
+        update smbms.smbms_user
+        set userName=#{userName},gender=#{gender},birthday=#{birthday},phone=#{phone},address=#{address},createdBy=#{createdBy},creationDate=#{createDate},modifyBy=#{modifyBy},modifyDate=#{modifyDate}
+        where id=#{id};
+    </update>
+    <update id="updateUserPwd" parameterType="Map">
+        update smbms.smbms_user
+        set userPassword = #{pwd}
+        where id=#{id};
+    </update>
+    <select id="searchUserByName" parameterType="String" resultType="smbmsUser">
+        <bind name="pattern" value="'%' + name + '%'" />
+        select *
+        from smbms.smbms_user
+        where userName like #{pattern};
+    </select>
+</mapper>

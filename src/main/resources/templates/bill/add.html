@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://getbootstrap.com/docs/4.0/examples/dashboard/ -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="">
+		<meta name="author" content="">
+
+		<title>Dashboard Template for Bootstrap</title>
+		<!-- Bootstrap core CSS -->
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link th:href="@{/css/dashboard.css}" rel="stylesheet">
+		<style type="text/css">
+			/* Chart.js */
+			
+			@-webkit-keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			@keyframes chartjs-render-animation {
+				from {
+					opacity: 0.99
+				}
+				to {
+					opacity: 1
+				}
+			}
+			
+			.chartjs-render-monitor {
+				-webkit-animation: chartjs-render-animation 0.001s;
+				animation: chartjs-render-animation 0.001s;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div th:replace="~{commons/commons::topbar}"></div>
+
+		<div class="container-fluid">
+			<div class="row">
+				<div th:replace="~{commons/commons::sidebar(active='list.html')}"></div>
+
+				<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+					<form th:action="@{/addBill}" method="post">
+						<p style="color: red" th:text="${addmsg}" th:if="${! #strings.isEmpty(addmsg)}"></p>
+						<div class="form-group">
+							<label>订单编码</label>
+							<input type="text" name="billCode" class="form-control"
+								   placeholder="必填">
+						</div>
+						<div class="form-group">
+							<label>商品名称</label>
+							<input type="text" name="productName" class="form-control"
+								   placeholder="必填">
+						</div>
+						<div class="form-group">
+							<label>商品描述</label>
+							<input type="text" name="productDesc" class="form-control"
+								   placeholder="如:日用品-皂类">
+						</div>
+						<div class="form-group">
+							<label>商品单位</label>
+							<input type="text" name="productUnit" class="form-control"
+								   placeholder="如:斤">
+						</div>
+						<div class="form-group">
+							<label>商品数量</label>
+							<input type="text" name="productCount" class="form-control"
+								   placeholder="必填">
+						</div>
+						<div class="form-group">
+							<label>总金额</label>
+							<input type="text" name="totalPrice" class="form-control"
+								   placeholder="必填">
+						</div>
+						<div class="form-group">
+							<label>支付</label><br/>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio"
+									   name="isPayment" value="1">
+								<label class="form-check-label">已支付</label>
+							</div>
+							<div class="form-check form-check-inline">
+								<input class="form-check-input" type="radio"
+									   name="isPayment" value="2">
+								<label class="form-check-label">未支付</label>
+							</div>
+						</div>
+						<div class="form-group">
+							<label>供应商</label>
+							<!--注意这里的name是department.id，因为传入的参数为id-->
+							<select class="form-control" name="providerId">
+								<option	th:each="provider:${addBillProviders}" th:text="${provider.getProName()}" th:value="${provider.getId()}"></option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-primary">添加</button>
+					</form>
+				</main>
+
+			</div>
+		</div>
+
+		<!-- Bootstrap core JavaScript
+    ================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script type="text/javascript" src="../../../../../../Desktop/springboot/asserts/js/jquery-3.2.1.slim.min.js"></script>
+		<script type="text/javascript" src="../../../../../../Desktop/springboot/asserts/js/popper.min.js"></script>
+		<script type="text/javascript" src="../../../../../../Desktop/springboot/asserts/js/bootstrap.min.js"></script>
+
+		<!-- Icons -->
+		<script type="text/javascript" src="../../../../../../Desktop/springboot/asserts/js/feather.min.js"></script>
+		<script>
+			feather.replace()
+		</script>
+
+		<!-- Graphs -->
+		<script type="text/javascript" src="../../../../../../Desktop/springboot/asserts/js/Chart.min.js"></script>
+		<script>
+			var ctx = document.getElementById("myChart");
+			var myChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					labels: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+					datasets: [{
+						data: [15339, 21345, 18483, 24003, 23489, 24092, 12034],
+						lineTension: 0,
+						backgroundColor: 'transparent',
+						borderColor: '#007bff',
+						borderWidth: 4,
+						pointBackgroundColor: '#007bff'
+					}]
+				},
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: false
+							}
+						}]
+					},
+					legend: {
+						display: false,
+					}
+				}
+			});
+		</script>
+
+	</body>
+
+</html>

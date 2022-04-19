@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口,改为对应的Dao接口位置-->
+<mapper namespace="com.sty.smbms_master.mapper.BillMapper">
+    <!--这句select相当于重写上面连接的接口的方法,id代表方法名，resultType代表方法的返回值类型-->
+    <select id="findAll" resultType="smbmsBill">
+        select *
+        from smbms.smbms_bill;
+    </select>
+
+    <select id="findByBillCode" parameterType="String" resultType="smbmsBill">
+        <bind name="pattern" value="'%' + billCode + '%'"/>
+        select *
+        from smbms.smbms_bill
+        where billCode like #{pattern};
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="smbmsBill">
+        <bind name="pattern" value="'%' + name + '%'"/>
+        select *
+        from smbms.smbms_bill
+        where productName like #{pattern};
+    </select>
+
+    <select id="findByTitle" parameterType="String" resultType="smbmsBill">
+        <bind name="pattern" value="'%' + title + '%'"/>
+        select *
+        from smbms.smbms_bill
+        where productDesc like #{pattern};
+    </select>
+    <delete id="deleteBill" parameterType="int">
+        delete
+        from smbms.smbms_bill
+        where id=#{id};
+    </delete>
+    <insert id="addBill" parameterType="smbmsBill">
+        insert into smbms.smbms_bill (billCode,productName,productDesc,productUnit,productCount,totalPrice,isPayment,providerId,createdBy,creationDate,modifyBy,modifyDate)
+        values (#{billCode},#{productName},#{productDesc},#{productUnit},#{productCount},#{totalPrice},#{isPayment},#{providerId},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate});
+    </insert>
+
+    <update id="updateBill" parameterType="smbmsBill">
+        update smbms.smbms_bill
+        set billCode = #{billCode},productName=#{productName},productDesc=#{productDesc},productUnit=#{productUnit},productCount=#{productCount},totalPrice=#{totalPrice},isPayment=#{isPayment},providerId=#{providerId},createdBy=#{createdBy},creationDate=#{creationDate},modifyBy=#{modifyBy},modifyDate=#{modifyDate}
+        where id=#{id};
+    </update>
+
+    <select id="findById" parameterType="int" resultType="smbmsBill">
+        select *
+        from smbms.smbms_bill
+        where id=#{id};
+    </select>
+</mapper>

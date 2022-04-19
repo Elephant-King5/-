@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口,改为对应的Dao接口位置-->
+<mapper namespace="com.sty.smbms_master.mapper.LoginMapper">
+    <!--这句select相当于重写上面连接的接口的方法,id代表方法名，resultType代表方法的返回值类型-->
+    <select id="findUserByName" parameterType="String" resultType="smbmsUser">
+        select *
+        from smbms.smbms_user
+        WHERE userCode=#{userCode};
+    </select>
+</mapper>

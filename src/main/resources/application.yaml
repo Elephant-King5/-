@@ -1,0 +1,15 @@
+spring:
+  thymeleaf:
+    cache: false
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/smbms?useUnicode=true&characterEncoding=utf-8&severTimezone=UTC
+    username: root
+    password: 12345678
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    format:
+      date: yyyy-MM-dd
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.sty.smbms_master.pojo

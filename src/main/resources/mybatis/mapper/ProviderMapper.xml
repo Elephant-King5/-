@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace=绑定一个对应的Dao/Mapper接口,改为对应的Dao接口位置-->
+<mapper namespace="com.sty.smbms_master.mapper.ProviderMapper">
+    <!--这句select相当于重写上面连接的接口的方法,id代表方法名，resultType代表方法的返回值类型-->
+    <select id="findAll" resultType="smbmsProvider">
+        select *
+        from smbms.smbms_provider;
+    </select>
+    <select id="findByProCode" resultType="smbmsProvider" parameterType="String">
+        <bind name="pattern" value="'%'+proCode+'%'"/>
+        select *
+        from smbms.smbms_provider
+        where proCode like #{pattern};
+    </select>
+    <select id="findByProName" resultType="smbmsProvider" parameterType="String">
+        <bind name="pattern" value="'%' + proName + '%'"/>
+        select *
+        from smbms.smbms_provider
+        where proName like #{pattern};
+    </select>
+    <select id="findByProDesc" resultType="smbmsProvider" parameterType="String">
+        <bind name="pattern" value="'%' + proDesc + '%'"/>
+        select *
+        from smbms.smbms_provider
+        where proDesc like #{pattern};
+    </select>
+    <insert id="addPro" parameterType="smbmsProvider">
+        insert into smbms.smbms_provider (proCode,proName,proDesc,proContact,proPhone,proAddress,proFax,createdBy,creationDate,modifyBy,modifyDate)
+        values (#{proCode},#{proName},#{proDesc},#{proContact},#{proPhone},#{proAddress},#{proFax},#{createdBy},#{creationDate},#{modifyBy},#{modifyDate});
+    </insert>
+
+    <select id="findProById" parameterType="int" resultType="smbmsProvider">
+        select *
+        from smbms.smbms_provider
+        where id=#{id};
+    </select>
+
+    <update id="comPro" parameterType="smbmsProvider">
+        update smbms.smbms_provider
+        set proCode = #{proCode},proName=#{proName},proDesc=#{proDesc},proContact=#{proContact},proPhone=#{proPhone},proAddress=#{proAddress},proFax=#{proFax},createdBy=#{createdBy},creationDate=#{creationDate},modifyBy=#{modifyBy},modifyDate=#{modifyDate}
+        where id = #{id};
+    </update>
+
+    <delete id="delPro" parameterType="int">
+        delete
+        from smbms.smbms_provider
+        where id=#{id};
+    </delete>
+</mapper>
