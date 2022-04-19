@@ -2,7 +2,8 @@
 SQLyog Ultimate v12.09 (64 bit)
 MySQL - 8.0.26 : Database - smbms
 *********************************************************************
-*/
+*/
+
 
 /*!40101 SET NAMES utf8 */;
 
@@ -147,7 +148,7 @@ CREATE TABLE `smbms_user` (
 
 LOCK TABLES `smbms_user` WRITE;
 
-insert  into `smbms_user`(`id`,`userCode`,`userName`,`userPassword`,`gender`,`birthday`,`phone`,`address`,`userRole`,`createdBy`,`creationDate`,`modifyBy`,`modifyDate`) values (1,'admin','系统管理员','123456',1,'1983-10-10','13688889999','北京市海淀区成府路207号',1,1,'2013-03-21 16:52:07',NULL,NULL),(22,'123,,','司天羿','123456',1,NULL,'15628880863','',NULL,NULL,NULL,NULL,NULL),(26,'123,,,,','123','123',1,NULL,'15628880863',NULL,NULL,NULL,NULL,NULL,NULL),(29,'123天123,','123','123456',1,NULL,'1562',NULL,NULL,1,'2021-11-17 09:26:48',NULL,NULL),(30,'123,','123天213','23333',NULL,NULL,'',NULL,NULL,1,'2021-11-17 09:27:18',NULL,NULL);
+insert  into `smbms_user`(`id`,`userCode`,`userName`,`userPassword`,`gender`,`birthday`,`phone`,`address`,`userRole`,`createdBy`,`creationDate`,`modifyBy`,`modifyDate`) values (1,'admin','系统管理员','123456',1,'1983-10-10','13688889999','北京市海淀区成府路207号',1,1,'2013-03-21 16:52:07',NULL,NULL),(26,'123,,,,','123','123',1,NULL,'15628880720',NULL,NULL,NULL,NULL,NULL,NULL),(29,'123天123,','123','123456',1,NULL,'1562',NULL,NULL,1,'2021-11-17 09:26:48',NULL,NULL),(30,'123,','123天213','23333',NULL,NULL,'',NULL,NULL,1,'2021-11-17 09:27:18',NULL,NULL);
 
 UNLOCK TABLES;
 
